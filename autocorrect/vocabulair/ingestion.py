@@ -1,6 +1,7 @@
 " This file is used for the creation of a autocorrect vocabulair. "
 
 import re
+from typing import Dict
 
 
 class Vocabulair:
@@ -19,7 +20,7 @@ class Vocabulair:
         self.word_probabilities = self.get_word_probabilities()
 
     @classmethod
-    def read_text_file(cls, file_name: str) -> list:
+    def read_text_file(cls, file_name: str) -> "Vocabulair":
         """
         This method reads in a text file and returns a list of words in lower case.
 
@@ -41,10 +42,16 @@ class Vocabulair:
         return cls(words)
 
     def _set_of_words(self) -> set:
-        """ """
+        """
+        This method creates as set of words from the initial text.
+
+        Output:
+            set of words
+
+        """
         return set(self.text)
 
-    def get_word_count(self) -> dict:
+    def get_word_count(self) -> Dict[str, int]:
         """
         This method creates a dictionary of words and word counts from a corpus.
 
@@ -52,10 +59,10 @@ class Vocabulair:
             set_of_words: a set of words representing the corpus.
 
         Output:
-            word_count_dict: The wordcount dictionary where key is the word and value is its frequency.
+            word_count_dict: Dictionary where key is the word and value is its frequency.
         """
 
-        word_count_dict = {}
+        word_count_dict: dict = {}
 
         for word in self.text:
             word_count_dict[word] = word_count_dict.get(word, 0) + 1
@@ -67,10 +74,11 @@ class Vocabulair:
         This method determines the probability that a words occurs in vector of words.
 
         Input:
-            word_count_dict: The wordcount dictionary where key is the word and value is its frequency.
+            word_count_dict: Dictionary where key is the word and value is its frequency.
 
         Output:
-            probs: A dictionary where keys are the words and the values are the probability that a word will occur.
+            probs: Dictionary where keys are the words
+              and the values are the probability that a word will occur.
         """
         probs = {}  # return this variable correctly
 
