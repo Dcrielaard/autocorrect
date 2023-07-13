@@ -1,12 +1,7 @@
 " This file is the main file for an autocorrect function"
 
 from autocorrect.vocabulair.ingestion import Vocabulair
-from autocorrect.manipulations.manipulations import (
-    delete_letter,
-    replace_letter,
-    insert_letter,
-    switch_letter,
-)
+
 
 # Create the vocabulair of words
 raw_vocab = Vocabulair.read_text_file("./data/shakespeare.txt")
