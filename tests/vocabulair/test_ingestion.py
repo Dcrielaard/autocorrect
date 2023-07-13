@@ -5,7 +5,7 @@ from autocorrect.vocabulair.ingestion import Vocabulair
 test_words = ["A", "B", "A", "C"]
 
 
-def test_initialization():
+def test_initialization() -> None:
     """
     Asserts if the initialized class is an instance of Vocabulair.
     """

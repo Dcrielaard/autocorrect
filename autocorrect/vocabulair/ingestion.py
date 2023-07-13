@@ -13,7 +13,7 @@ class Vocabulair:
 
     """
 
-    def __init__(self, text: list):
+    def __init__(self, text: list[str]):
         self.text = text
         self.set_of_words = self._set_of_words()
         self.word_counts = self.get_word_count()
@@ -41,7 +41,7 @@ class Vocabulair:
 
         return cls(words)
 
-    def _set_of_words(self) -> set:
+    def _set_of_words(self) -> set[str]:
         """
         This method creates as set of words from the initial text.
 
@@ -62,14 +62,14 @@ class Vocabulair:
             word_count_dict: Dictionary where key is the word and value is its frequency.
         """
 
-        word_count_dict: dict = {}
+        word_count_dict: dict[str, int] = {}
 
         for word in self.text:
             word_count_dict[word] = word_count_dict.get(word, 0) + 1
 
         return word_count_dict
 
-    def get_word_probabilities(self):
+    def get_word_probabilities(self) -> dict[str, int]:
         """
         This method determines the probability that a words occurs in vector of words.
 
