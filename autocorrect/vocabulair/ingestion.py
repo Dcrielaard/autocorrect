@@ -69,7 +69,7 @@ class Vocabulair:
 
         return word_count_dict
 
-    def get_word_probabilities(self) -> dict[str, int]:
+    def get_word_probabilities(self) -> dict[str, float]:
         """
         This method determines the probability that a words occurs in vector of words.
 
