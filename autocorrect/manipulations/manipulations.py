@@ -1,100 +1,100 @@
 " This files contains the various string manipulations "
 
 
-def delete_letter(word, verbose=False):
+class Manipulations:
     """
-    Input:
-        word: the string/word for which you will generate all possible words
-                in the vocabulary which have 1 missing character
-    Output:
-        delete_l: a list of all possible strings obtained by deleting 1 character from word
-    """
+    This class hosts the different string manipulations
+    which are a possible with single word.
 
-    delete_l = []
-    split_l = []
+    Args:
+        word: string word where the string manipulations need to be applied on.
 
-    for i in range(len(word)):
-        split_l.append((word[:i], word[i:]))
-        delete_l.append(word[:i] + word[i + 1 :])
-
-    if verbose:
-        print(f"input word {word}, \nsplit_l = {split_l}, \ndelete_l = {delete_l}")
-
-    return delete_l
-
-
-def switch_letter(word, verbose=False):
-    """
-    Input:
-        word: input string
-     Output:
-        switches: a list of all possible strings with one adjacent charater switched
     """
 
-    switch_l = []
-    split_l = []
+    def __init__(self, word):
+        self.word = word
+        self.list_of_tuple_splits = self._split_word()
 
-    for i in range(len(word)):
-        split_l.append((word[:i], word[i:]))
-        switch_l = [L[:-1] + R[0] + L[-1] + R[1:] for L, R in split_l if len(L) > 0]
+    def _split_word(self):
+        splits_list = []
+        for i in range(len(self.word)):
+            splits_list.append((self.word[:i], self.word[i:]))
+        return splits_list
 
-    if verbose:
-        print(f"Input word = {word} \nsplit_l = {split_l} \nswitch_l = {switch_l}")
+    def delete_letter(self):
+        """
+        This method will generate a list of all possible words which are possible by removing
+        a single letter from a word
 
-    return switch_l
+        Returns:
+            delete_list: A list of all strings by deleting a single character from a word
 
+        """
+        delete_list = []
+        for i in range(len(self.word)):
+            delete_list.append(self.word[:i] + self.word[i + 1 :])
+        return delete_list
 
-def replace_letter(word, verbose=False):
-    """
-    Input:
-        word: the input string/word
-    Output:
-        replaces: a list of all possible strings where we replaced one letter from the original word.
-    """
+    def switch_letter(self):
+        """
+        This method generates a list of possible words by switching a single letter from a word.
 
-    letters = "abcdefghijklmnopqrstuvwxyz"
+        Returns:
+            switch_list: A list of all strings where a single letter has been switched.
 
-    replace_l = []
-    split_l = []
+        """
+        switch_list = []
+        for _ in range(len(self.word)):
+            switch_list = [
+                L[:-1] + R[0] + L[-1] + R[1:]
+                for L, R in self.list_of_tuple_splits
+                if len(L) > 0
+            ]
 
-    for c in range(len(word)):
-        split_l.append((word[0:c], word[c:]))
-    replace_l = [
-        a + l + (b[1:] if len(b) > 1 else "") for a, b in split_l if b for l in letters
-    ]
-    replace_set = set(replace_l)
-    replace_set.discard(word)
+        return switch_list
 
-    # turn the set back into a list and sort it, for easier viewing
-    replace_l = sorted(list(replace_set))
+    def replace_letter(self):
+        """
+        This method returns a set of words where 1 letter has been switched with another letter
 
-    if verbose:
-        print(f"Input word = {word} \nsplit_l = {split_l} \nreplace_l {replace_l}")
+        Returns:
+            replace_l: Set of words with 1 letter switched with another
 
-    return replace_l
+        """
+        letters = "abcdefghijklmnopqrstuvwxyz"
+        replace_l = []
 
+        for _ in range(len(self.word)):
+            replace_l = [
+                a + l + (b[1:] if len(b) > 1 else "")
+                for a, b in self.list_of_tuple_splits
+                if b
+                for l in letters
+            ]
 
-def insert_letter(word, verbose=False):
-    """
-    Input:
-        word: the input string/word
-    Output:
-        inserts: a set of all possible strings with one new letter inserted at every offset
-    """
-    letters = "abcdefghijklmnopqrstuvwxyz"
-    insert_l = []
-    split_l = []
+        replace_set = set(replace_l)
+        replace_set.discard(self.word)
+        return list(replace_set)
 
-    for i in range(len(word) + 1):
-        split_l.append((word[:i], word[i:]))
+    def insert_letter(self):
+        """
+        Method creates a list of words with an added single character
 
-        for character in letters:
-            insert_l.append(word[:i] + character + word[i:])
+        Returns:
+            insert_l: List of words where 1 character has been added.
 
-    if verbose:
-        print(f"Input word {word} \nsplit_l = {split_l} \ninsert_l = {insert_l}")
+        """
 
-    return insert_l
+        letters = "abcdefghijklmnopqrstuvwxyz"
+        insert_l = []
+        split_l = []
+
+        for i in range(len(self.word) + 1):
+            split_l.append((self.word[:i], self.word[i:]))
+            for character in letters:
+                insert_l.append(self.word[:i] + character + self.word[i:])
+
+        return insert_l
 
 
 def edit_one_letter(word, allow_switches=True):
@@ -107,22 +107,24 @@ def edit_one_letter(word, allow_switches=True):
 
     edit_one_set = set()
 
-    ### START CODE HERE ###
+    manipulations = Manipulations(word)
+
     if allow_switches:
         list_of_words = (
-            insert_letter(word)
-            + replace_letter(word)
-            + switch_letter(word)
-            + delete_letter(word)
+            manipulations.insert_letter()
+            + manipulations.replace_letter()
+            + manipulations.switch_letter()
+            + manipulations.delete_letter()
         )
     else:
-        list_of_words = insert_letter(word) + replace_letter(word) + delete_letter(word)
+        list_of_words = (
+            manipulations.insert_letter()
+            + manipulations.replace_letter()
+            + manipulations.delete_letter()
+        )
 
     edit_one_set = set(list_of_words)
 
-    ### END CODE HERE ###
-
-    # return this as a set and not a list
     return set(edit_one_set)
 
 
@@ -136,13 +138,10 @@ def edit_two_letters(word, allow_switches=True):
 
     edit_two_set = set()
 
-    ### START CODE HERE ###
-
     ones = edit_one_letter(word, allow_switches)
-    for word in ones:
-        edit_two_set = edit_two_set.union(edit_one_letter(word, allow_switches))
 
-    ### END CODE HERE ###
+    for single_word in ones:
+        edit_two_set = edit_two_set.union(edit_one_letter(single_word, allow_switches))
 
     # return this as a set instead of a list
     return set(edit_two_set)

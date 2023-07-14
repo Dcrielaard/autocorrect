@@ -2,12 +2,9 @@
 
 from autocorrect.vocabulair.ingestion import Vocabulair
 from autocorrect.manipulations.manipulations import (
-    delete_letter,
-    insert_letter,
-    replace_letter,
-    switch_letter,
     edit_one_letter,
     edit_two_letters,
+    Manipulations,
 )
 
 
@@ -20,8 +17,8 @@ print(f"P('thee') is {raw_vocab.word_probabilities['thee']:.4f}")
 print(f"There are {len(raw_vocab.word_counts)} key values pairs")
 print(f"The count for the word 'thee' is {raw_vocab.word_counts.get('thee',0)}")
 
-print(delete_letter(word="cans", verbose=True))
-print(switch_letter(word="eta", verbose=True))
+
+"""
 print(replace_letter(word="can", verbose=True))
 print(insert_letter("at", True))
 
@@ -45,3 +42,11 @@ print(f"The data type of the returned object should be a set {type(tmp_edit_two_
 print(
     f"Number of strings that are 2 edit distances from 'at' is {len(edit_two_letters('at'))}"
 )
+"""
+
+# manipulater = Manipulations("Dennis")
+# print(manipulater.delete_letter())
+# print(manipulater.switch_letter())
+# print(manipulater.replace_letter())
+# print(manipulater.insert_letter())
+print(len(edit_two_letters("dennis")))
