@@ -2,9 +2,7 @@
 
 from autocorrect.vocabulair.ingestion import Vocabulair
 from autocorrect.manipulations.manipulations import (
-    edit_one_letter,
     edit_two_letters,
-    Manipulations,
 )
 
 
