@@ -32,12 +32,12 @@ class Vocabulair:
         """
         words = []
 
-        fhand = open(file_name)
-        for line in fhand:
-            line = line.lower()
-            list_of_words = re.findall(r"\w+", line)
-            for word in list_of_words:
-                words.append(word)
+        with open(file_name, encoding="utf-8") as fhand:
+            for line in fhand:
+                line = line.lower()
+                list_of_words = re.findall(r"\w+", line)
+                for word in list_of_words:
+                    words.append(word)
 
         return cls(words)
 
