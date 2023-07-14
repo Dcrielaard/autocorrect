@@ -11,17 +11,17 @@ class Manipulations:
 
     """
 
-    def __init__(self, word):
+    def __init__(self, word: str):
         self.word = word
         self.list_of_tuple_splits = self._split_word()
 
-    def _split_word(self):
+    def _split_word(self) -> list[tuple[str, str]]:
         splits_list = []
         for i in range(len(self.word)):
             splits_list.append((self.word[:i], self.word[i:]))
         return splits_list
 
-    def delete_letter(self):
+    def delete_letter(self) -> list[str]:
         """
         This method will generate a list of all possible words which are possible by removing
         a single letter from a word
@@ -35,7 +35,7 @@ class Manipulations:
             delete_list.append(self.word[:i] + self.word[i + 1 :])
         return delete_list
 
-    def switch_letter(self):
+    def switch_letter(self) -> str:
         """
         This method generates a list of possible words by switching a single letter from a word.
 
@@ -53,7 +53,7 @@ class Manipulations:
 
         return switch_list
 
-    def replace_letter(self):
+    def replace_letter(self) -> str:
         """
         This method returns a set of words where 1 letter has been switched with another letter
 
@@ -76,7 +76,7 @@ class Manipulations:
         replace_set.discard(self.word)
         return list(replace_set)
 
-    def insert_letter(self):
+    def insert_letter(self) -> str:
         """
         Method creates a list of words with an added single character
 
@@ -97,7 +97,7 @@ class Manipulations:
         return insert_l
 
 
-def edit_one_letter(word, allow_switches=True):
+def edit_one_letter(word, allow_switches=True) -> set[str]:
     """
     Input:
         word: the string/word for which we will generate all possible words that are one edit away.
@@ -128,7 +128,7 @@ def edit_one_letter(word, allow_switches=True):
     return set(edit_one_set)
 
 
-def edit_two_letters(word, allow_switches=True):
+def edit_two_letters(word, allow_switches=True) -> set[str]:
     """
     Input:
         word: the input string/word
@@ -143,5 +143,4 @@ def edit_two_letters(word, allow_switches=True):
     for single_word in ones:
         edit_two_set = edit_two_set.union(edit_one_letter(single_word, allow_switches))
 
-    # return this as a set instead of a list
     return set(edit_two_set)
