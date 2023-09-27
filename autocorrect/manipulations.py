@@ -1,4 +1,6 @@
-" This files contains the various string manipulations "
+"""
+This files contains the various string manipulations
+"""
 
 
 class Manipulations:

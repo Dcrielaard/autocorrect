@@ -1,6 +1,6 @@
 " This file tests the ingestion module from the vocabulair "
 
-from autocorrect.vocabulair.ingestion import Vocabulair
+from autocorrect.ingestion import Vocabulair
 
 test_words = ["A", "B", "A", "C"]
 

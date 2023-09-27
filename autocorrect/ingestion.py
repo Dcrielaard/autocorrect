@@ -1,4 +1,6 @@
-" This file is used for the creation of a autocorrect vocabulair. "
+"""
+This file is used for the creation of a autocorrect vocabulair.
+"""
 
 import re
 from typing import Dict

@@ -1,7 +1,9 @@
-" This file is the main file for an autocorrect function"
+"""
+This file is the main file for an autocorrect function
+"""
 
-from autocorrect.vocabulair.ingestion import Vocabulair
-from autocorrect.manipulations.manipulations import (
+from autocorrect.ingestion import Vocabulair
+from autocorrect.manipulations import (
     edit_two_letters,
 )
 
