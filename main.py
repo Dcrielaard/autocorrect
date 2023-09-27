@@ -3,9 +3,6 @@ This file is the main file for an autocorrect function
 """
 
 from autocorrect.ingestion import Vocabulair
-from autocorrect.manipulations import (
-    edit_two_letters,
-)
 from autocorrect.corrections import get_corrections
 
 
