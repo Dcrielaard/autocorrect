@@ -2,12 +2,17 @@
 This file contains the different corrections.
 """
 
+from typing import Tuple, Dict
 from autocorrect.manipulations import edit_one_letter, edit_two_letters
 
 
 def get_corrections(
-    word: str, probs: dict, vocab: dict, n: int = 2, verbose: bool = False
-) -> list:
+    word: str,
+    probs: Dict[str, float],
+    vocab: Dict[str, int],
+    n: int = 2,
+    verbose: bool = False,
+) -> list[Tuple(str, float)]:
     """
     Input:
         word: a user entered string to check for suggestions
@@ -46,7 +51,7 @@ def get_corrections(
         n_best.append((suggestion, probs.get(suggestion, 0)))
 
     # Step 3: Get all your best words and return the most probable top n_suggested words as n_best
-    n_best = sorted(n_best, key=lambda tup: tup[1], reverse=True)
+    n_best = sorted(n_best, key=lambda tup: tup[1], reverse=True)  # type: ignore
     n_best = n_best[0:5]
 
     if verbose:
