@@ -62,6 +62,3 @@ tmp_corrections = get_corrections(
 )  # keep verbose=True
 for i, word_prob in enumerate(tmp_corrections):
     print(f"word {i}: {word_prob[0]}, probability {word_prob[1]:.6f}")
-
-
-print(vocab)

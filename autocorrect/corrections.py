@@ -2,7 +2,7 @@
 This file contains the different corrections.
 """
 
-from typing import Tuple, Dict
+from typing import Tuple, Dict, List
 from autocorrect.manipulations import edit_one_letter, edit_two_letters
 
 
@@ -12,7 +12,7 @@ def get_corrections(
     vocab: Dict[str, int],
     n: int = 2,
     verbose: bool = False,
-) -> list[Tuple(str, float)]:
+) -> List[Tuple[str, float]]:
     """
     Input:
         word: a user entered string to check for suggestions
