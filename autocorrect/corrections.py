@@ -5,7 +5,7 @@ This file contains the different corrections.
 from autocorrect.manipulations import edit_one_letter, edit_two_letters
 
 
-def get_corrections(word, probs, vocab, n=2, verbose=False):
+def get_corrections(word: str, probs: dict, vocab: dict, n: int = 2, verbose: bool = False) -> list:
     """
     Input:
         word: a user entered string to check for suggestions
