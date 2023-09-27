@@ -6,16 +6,17 @@ from autocorrect.ingestion import Vocabulair
 from autocorrect.manipulations import (
     edit_two_letters,
 )
+from autocorrect.corrections import get_corrections
 
 
 # Create the vocabulair of words
 raw_vocab = Vocabulair.read_text_file("./data/shakespeare.txt")
 
-print(f"The first ten words in the text are: \n{raw_vocab.text[0:10]}")
-print(f"There are {len(raw_vocab.set_of_words)} unique words in the vocabulary.")
-print(f"P('thee') is {raw_vocab.word_probabilities['thee']:.4f}")
-print(f"There are {len(raw_vocab.word_counts)} key values pairs")
-print(f"The count for the word 'thee' is {raw_vocab.word_counts.get('thee',0)}")
+#print(f"The first ten words in the text are: \n{raw_vocab.text[0:10]}")
+#print(f"There are {len(raw_vocab.set_of_words)} unique words in the vocabulary.")
+#print(f"P('thee') is {raw_vocab.word_probabilities['thee']:.4f}")
+#print(f"There are {len(raw_vocab.word_counts)} key values pairs")
+#print(f"The count for the word 'thee' is {raw_vocab.word_counts.get('thee',0)}")
 
 
 """
@@ -49,4 +50,17 @@ print(
 # print(manipulater.switch_letter())
 # print(manipulater.replace_letter())
 # print(manipulater.insert_letter())
-print(len(edit_two_letters("dennis")))
+# print(len(edit_two_letters("dennis")))
+
+vocab = raw_vocab.word_counts
+probs = raw_vocab.word_probabilities
+
+
+# Test your implementation - feel free to try other words in my word
+my_word = 'dys' 
+
+
+tmp_corrections = get_corrections(my_word, probs, vocab, 2, verbose=True) # keep verbose=True
+for i, word_prob in enumerate(tmp_corrections):
+    print(f"word {i}: {word_prob[0]}, probability {word_prob[1]:.6f}")
+
