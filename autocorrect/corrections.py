@@ -51,7 +51,7 @@ def get_corrections(
         n_best.append((suggestion, probs.get(suggestion, 0)))
 
     # Step 3: Get all your best words and return the most probable top n_suggested words as n_best
-    n_best = sorted(n_best, key=lambda tup: int(tup[1]), reverse=True)  # type: ignore
+    n_best = sorted(n_best, key=lambda tup: int(tup[1]), reverse=True)
     n_best = n_best[0:5]
 
     if verbose:
